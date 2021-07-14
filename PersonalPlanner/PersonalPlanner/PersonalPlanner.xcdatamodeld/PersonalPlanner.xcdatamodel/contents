@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Action" representedClassName="Action" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="period" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="actionToPerson" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PersonAction" inverseName="actionChain" inverseEntity="PersonAction"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Person" representedClassName="Person" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="fio" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="personToAction" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PersonAction" inverseName="personChain" inverseEntity="PersonAction"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PersonAction" representedClassName="PersonAction" syncable="YES">
+        <attribute name="actionID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="personID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="actionChain" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Action" inverseName="actionToPerson" inverseEntity="Action"/>
+        <relationship name="personChain" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Person" inverseName="personToAction" inverseEntity="Person"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="actionID"/>
+                <constraint value="personID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Person" positionX="-45.4140625" positionY="132.61328125" width="128" height="103"/>
+        <element name="Action" positionX="-72.82421875" positionY="302.29296875" width="128" height="103"/>
+        <element name="PersonAction" positionX="332.21484375" positionY="189.265625" width="128" height="118"/>
+    </elements>
+</model>
